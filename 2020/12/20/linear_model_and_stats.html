@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      6 min read
     
 </span></p>
 
@@ -135,7 +135,32 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Derivation-of-simple-statistics">1. Derivation of simple statistics<a class="anchor-link" href="#1.-Derivation-of-simple-statistics"> </a></h3>
+<p>I think that the hardest thing in starting the journey in data science is actually to answer the question: where to start? The majority of people are concerned with mathematics - how much I actually need it? What kind of math? How deep I should go? Almost all resources agree that you should know some stats, linear algebra, calculus, optimization and usually they throw at you a few books because reading books doesn't hurt right? I think that they could actually hurt because if you dedicate too much mental energy and time understanding the books you don't have time to focus on things that actually drive your value as a data scientist - coding, data wrangling skills, familiarity with basic tech (git, SQL, docker...). 5 hours practicing pandas could have an incredible impact on the value you can bring as a data scientist, 5 hours spending on determinants have on the other hand doubtful value at this stage. But is the recommendation really never look at math because you don't need it?</p>
+<p>Not at all, but we should take into account something that economist call the law of diminishing returns (<a href="https://en.wikipedia.org/wiki/Diminishing_returns">https://en.wikipedia.org/wiki/Diminishing_returns</a>). Simply put, any additional hour you put into learning some particular skill will be worth less and less - just because you already picked all low hanging fruit. Take for example the pandas data wrangling skills, if you spend 1 additional hour with it after a couple of years you are using it, you will not change the way how you use it, and probably not discover anything new because you already mastered most of it. How is it related to learning math for data science? In the beginning, it has just quite a bad ratio in cost-benefit analyses, but over time you learn pandas, sklearn, sql... and the math will again be in a better position to pick up the book about Linear Algebra. This would unfortunately mean that you maybe don't touch any math in the first few months at all. This philosophy of hands-on first experience starts to be popular with projects such as fastai which helps you to build state-of-the-art DL models with a reasonable level of understanding without any math.</p>
+<p>Although I like the approach, in general, I think that it would be nice to have at least a little bit of math which could have a better cost/benefit ratio at the beginning so it would be worth learning it already as a beginner. This is my attempt to provide the "math" basics with a good cost/benefit ratio which was useful for my data science practice and I would like to have it when I started.</p>
+<p>Everything that follows is the basic stats with the basics of linear models. If you understand deep enough the relationships between these two, your intuition about linear models and data analyses will grow rapidly and help you to discover flaws in your analyses/modeling more quickly. It can also help to guide modeling and interpretation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Simple-statistics">Simple statistics<a class="anchor-link" href="#Simple-statistics"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I would recommend simply memorize the following few basic statiscs</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$
+\bar{x}=\frac{1}{n} \sum_{i=1}^{n} x_{i}
+$$
 </div>
 </div>
 </div>
@@ -246,7 +271,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Derivation-of-normal-equations-for-multiple-linear-regression">2. Derivation of normal equations for multiple linear regression<a class="anchor-link" href="#2.-Derivation-of-normal-equations-for-multiple-linear-regression"> </a></h3>
+<h3 id="Normal-equations-for-multiple-linear-regression">Normal equations for multiple linear regression<a class="anchor-link" href="#Normal-equations-for-multiple-linear-regression"> </a></h3>
 </div>
 </div>
 </div>
@@ -320,7 +345,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The least squares estimator is obtained by minimizing S(b)</p>
+<p>the least squares estimator is obtained by minimizing S(b)</p>
 
 </div>
 </div>
@@ -350,7 +375,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Solving this for b we get normal equation</p>
+<p>solving this for b we get normal equation</p>
 
 </div>
 </div>
@@ -365,7 +390,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Derivation-of-relationship-between-regression-and-correlation-coeficient-for-univariate-case">3. Derivation of relationship between regression and correlation coeficient for univariate case<a class="anchor-link" href="#3.-Derivation-of-relationship-between-regression-and-correlation-coeficient-for-univariate-case"> </a></h3>
+<h3 id="Relationship-between-regression-and-correlation-coeficient-for-univariate-case">Relationship between regression and correlation coeficient for univariate case<a class="anchor-link" href="#Relationship-between-regression-and-correlation-coeficient-for-univariate-case"> </a></h3>
 </div>
 </div>
 </div>
@@ -387,7 +412,7 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 $$
-b_{x y}= \frac{s_{x y}}{s_{x}^{2}}
+b= \frac{s_{x y}}{s_{x}^{2}}
 $$
 </div>
 </div>
@@ -410,7 +435,7 @@ $$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>if</p>
+<p>if they have the same variance (are scaled):</p>
 
 </div>
 </div>
@@ -824,10 +849,10 @@ $$
 
 
 
-<div id="ab7781e1-7bce-43a6-89d4-1ad048522742"></div>
+<div id="debfe720-85f7-4ea0-b8ce-04c7336fa8f5"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#ab7781e1-7bce-43a6-89d4-1ad048522742');
+var element = $('#debfe720-85f7-4ea0-b8ce-04c7336fa8f5');
 
 (function(root) {
   function now() {
@@ -1347,10 +1372,10 @@ var element = $('#ab7781e1-7bce-43a6-89d4-1ad048522742');
 
 
 
-<div id="4ae38830-5497-4a2a-81af-f0327ab67470"></div>
+<div id="970f9c73-22d7-47dd-817e-61d823252be2"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#4ae38830-5497-4a2a-81af-f0327ab67470');
+var element = $('#970f9c73-22d7-47dd-817e-61d823252be2');
 (function(root) {
   function embed_document(root) {
     
