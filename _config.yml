@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: ML blog
+description: Modeling topics I found helpful to know about but are hard to found anywhere else.
 github_username: pavelkrizek
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "ml-blog"
@@ -39,11 +39,11 @@ baseurl: "/ml-blog" # the subpath of your site, e.g. "/blog".
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: fastdotai
-    github: fastai
+    twitter: PavelKrizek
+    github: pavelkrizek
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math: true
 
 # Set this to true to display the summary of your blog post under your title on the Home page.
 show_description: true
