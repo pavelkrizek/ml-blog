@@ -4,8 +4,6 @@ title: About Me
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+I am a data scientist working at Heidelberg Cement last 3 years on topics such as demand prediction, production planning and prediction of production parameters. Before I have worked at PwC as data analyst. I studied economics and econometrics and I have deep interest in ML explainability/transparency and merging various modeling approaches (Bayesian, classical ML, DL - Keras, Econometrical...) whatever works the best, no bias :D
 
 
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
