@@ -143,8 +143,8 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There is often a discussion about what is the science part of data science. I like Karl Popper's definition of the scientific process as a process of falsifying the hypothesis and evaluating predictions. Karl Popper was born in 1902 and he was very close to the major progress in different fields - he observed Einstein coming up with the Relativity Theory and his desire to repeatedly experimentally test his theory even after it was already widely accepted. Popper also observed Sigmund Freud who approach the theories from a different side - he observed some phenomenon and come up with a theory to explain it, but no hypothesis testing, no prediction evaluation was part of the process, Karl Popper called it pseudo-science.</p>
-<p>To me, there is a strong parallel between this story and the methodology used commonly in data science called cross-validation. We cannot just create a model based on past observations without any evaluation of unseen data. Theory/model which can perfectly explain a past observation is of no value if it cannot be used for prediction since there is an infinite set of concurrent perfect fits - perfect explanations. Freud's theories are today considered good maybe for leisure reading but not as a scientific theory as opposed to Einstein's work so we should rather test our models as thoroughly and honestly as possible to strive for a successful long-running model in production.
-It could look incredibly dumb to say that by calling <code>cross_validate</code>(X, y, 5) we are doing science, but it doesn't really matter how simple is to evaluate prediction if you are doing it right. Despite awesome tools like the sklearn there are still many traps we can fall into and this small blog-post can show how to prevent at least some of them and give few tricks I found useful in practice.</p>
+<p>To me, there is a strong parallel between this story and the methodology used commonly in data science called cross-validation. We cannot just create a model based on past observations without any evaluation of unseen data. Theory/model which can perfectly explain a past observation is of no value if it cannot be used for prediction since there is an infinite set of concurrent perfect fits - perfect explanations. Freud's theories are today considered good maybe for leisure reading but not as a scientific theory as opposed to Einstein's work so we should rather test our models as thoroughly and honestly as possible to strive for a successful long-running model in production.</p>
+<p>It could look incredibly dumb to say that by calling <code>cross_validate</code>(X, y, 5) we are doing science, but it doesn't really matter how simple is to evaluate prediction if you are doing it right. Despite awesome tools like the sklearn there are still many traps we can fall into and this small blog-post can show how to prevent at least some of them and give you few tricks I found useful in practice.</p>
 
 </div>
 </div>
@@ -235,7 +235,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;the train dataset shape&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;the est dataset shape&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;the test dataset shape&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -249,7 +249,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>(700, 5) the train dataset shape
-(300, 5) the est dataset shape
+(300, 5) the test dataset shape
 </pre>
 </div>
 </div>
@@ -275,7 +275,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -290,7 +290,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.7438210243365382</pre>
+<pre>0.74</pre>
 </div>
 
 </div>
@@ -303,7 +303,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>R2 = 0.73 not bad right? Let's just try it one more time.</p>
+<p>R2 = 0.74 not bad right? Let's just try it one more time.</p>
 
 </div>
 </div>
@@ -332,7 +332,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -347,7 +347,7 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.6277279246349733</pre>
+<pre>0.63</pre>
 </div>
 
 </div>
@@ -360,14 +360,14 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>What happened? As usual, the devil is in the detail, and details in the case of functions are default parameters. In the case of <code>train_test_split</code> the parameter is <code>shuffle</code> default is <code>True</code> so if your data has any inherent structure (like sensor values from the different time), you run into the risk that you will have an artificially good prediction because you leaked information about temporal structure into your training set.</p>
+<p>What happened? As usual, the devil is in the detail, and details in the case of functions are default parameters. In the case of <code>train_test_split</code> function the usual suspect is the parameter <code>shuffle</code> with default being <code>True</code> so if your data has any inherent structure (like sensor values from the differen t time), you run into the risk that you will have an artificially good prediction because you leaked information about temporal structure into your training set.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You could assume that <code>shuffle</code> is <code>True</code> for all other splitting functions but you would be wrong. Let say that you want to have more robust cross-validation so you want more splits so for a regression problem natural selection would be <code>Kfold</code>, but it has <code>shuffle</code> with default <code>False</code>.</p>
+<p>You could assume that <code>shuffle</code> is <code>True</code> for all other splitting functions - but you would be wrong. Let say that you want to have more robust cross-validation so you want more splits. The natural selection would be <code>Kfold</code> class, but it has <code>shuffle</code> with default <code>False</code>, so watch out for defaults in sklearn (check i.e. this article for other problematic defaults in sklearn <a href="https://ryxcommar.com/2019/08/30/scikit-learns-defaults-are-wrong/">https://ryxcommar.com/2019/08/30/scikit-learns-defaults-are-wrong/</a>)</p>
 
 </div>
 </div>
@@ -380,7 +380,9 @@ It could look incredibly dumb to say that by calling <code>cross_validate</code>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The problem of having data with some structure (often temporal) which would result in data leakage when shuffling the data is in my experience far more common than is usually acknowledged. Most of the training data are collected over time and, likely, the relationships are not fixed. Take customer/sales related data - trends, behaviors, social paradigm everything is constantly changing so trying to evaluate performance with shuffling the data will very likely result in overfitting (think i.e. about the impact of covid on sales of toilet paper). At first look, it could seem that the temporal changes are not that much connected with machine-generated data (sensors...), and shuffling is just a fine strategy. It could be, but very often it's not - sensors, devices, machines are changed and operated by humans with an unstable performance which very often leads to trends visible in the data. The simplest thing to do is to just plot your dependent variable over time and check whether there are any visible trends and try to cross-validate with shuffling and without to see if there are any significant differences. If you spot that the data are not really perpendicular to the time dimension we should cross-validate accordingly. Sklearn offers TimeSeriesSplit. Be sure to use version =&gt; 0.24, before this class had just argument n_splits and max_train_size which made it quite useless. From version 0.24 you can use test_size to specify your horizon, max_train_size to clip your data (maybe you want to keep just 2 last years of sales data for training because older are not relevant anymore), gap argument is very useful to evaluate multiple splits more independent. The following code nicely illustrates how individual parameters works:</p>
+<p>The problem of having data with some structure (often temporal) which would result in data leakage when shuffling the data is in my experience far more common than is usually acknowledged. Most of the training data are collected over time and, likely, the relationships are not fixed. Take customer/sales related data - trends, behaviors, social paradigm everything is constantly changing so trying to evaluate performance with shuffling the data will very likely result in overfitting (think i.e. about the impact of covid on sales of toilet paper). At first look, it could seem that the temporal changes are not that much connected with machine-generated data (sensors...), and shuffling is just a fine strategy. It could be, but very often it's not - sensors, devices, machines are changed and operated by humans with an unstable performance which very often leads to trends visible in the data.</p>
+<p>The simplest thing to do is to just plot your dependent variable over time and check whether there are any visible trends and try to cross-validate with shuffling and without to see if there are any significant differences. If you spot that the data are not really perpendicular to the time dimension we should cross-validate accordingly.</p>
+<p>Sklearn offers TimeSeriesSplit. Be sure to use version =&gt; 0.24, before this class had just argument n_splits and max_train_size which made it quite useless. From version 0.24 you can use test_size to specify your horizon, max_train_size to clip your data (maybe you want to keep just 2 last years of sales data for training because older are not relevant anymore), gap argument is very useful to make multiple splits more independent. The following code nicely illustrates how individual parameters works:</p>
 
 </div>
 </div>
@@ -428,7 +430,7 @@ TRAIN: [985 986 987 988 989 990 991 992 993 994] TEST: [997 998 999]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One thing I don't particularly like about sklearn is that in most cases the prediction from GridSearch and cross-validation are not available and we are left just with few statistics. One workaround for that could be a custom implementation of a scoring function that tracks the data for you as it's done i.e. in hcrystalball package (disclosure I'm the maintainer of this project <a href="https://github.com/heidelbergcement/hcrystalball/blob/master/src/hcrystalball/metrics/_scorer.py">https://github.com/heidelbergcement/hcrystalball/blob/master/src/hcrystalball/metrics/_scorer.py</a>), but it currently works just with hcrystalball wrapper and not with parallel computing. One solution is to use <code>cross_val_predict</code> which is returning predictions for all folds, but it doesn't work with <code>TimeSeriesSplit</code> thus very often the simplest solution is to use <code>KFold</code> with the sorted dataset by datetime without shuffling which we can get just by specifying <code>cv</code> parameter of <code>cross_val_predict</code> as an integer.</p>
+<p>One thing I don't particularly like about sklearn is that in most cases the prediction from GridSearch and cross-validation are not available and we are left just with few summarizing numbers about model performance. One workaround for that could be a custom implementation of a scoring function that tracks the data for you as it's done i.e. in hcrystalball package (disclosure I'm the maintainer of this project <a href="https://github.com/heidelbergcement/hcrystalball/blob/master/src/hcrystalball/metrics/_scorer.py">https://github.com/heidelbergcement/hcrystalball/blob/master/src/hcrystalball/metrics/_scorer.py</a>), but it currently works just with hcrystalball wrapper and not with parallel computing (n_jobs&gt;1). One solution is to use <code>cross_val_predict</code> which is returning predictions for all folds, but it doesn't work with <code>TimeSeriesSplit</code> thus very often the simplest solution is to use <code>KFold</code> with the sorted dataset by datetime without shuffling which we can get just by specifying <code>cv</code> parameter of <code>cross_val_predict</code> as an integer as showen below.</p>
 
 </div>
 </div>
@@ -436,6 +438,44 @@ TRAIN: [985 986 987 988 989 990 991 992 993 994] TEST: [997 998 999]
     
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&quot;DejaVu Sans&quot;</span><span class="p">,</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="s2">&quot;axes.axisbelow&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;axes.edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes.facecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;axes.labelcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;figure.facecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lines.solid_capstyle&quot;</span><span class="p">:</span> <span class="s2">&quot;round&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;patch.edgecolor&quot;</span><span class="p">:</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text.color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.bottom&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.direction&quot;</span><span class="p">:</span> <span class="s2">&quot;out&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="s2">&quot;x-large&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="s2">&quot;x-large&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.direction&quot;</span><span class="p">:</span> <span class="s2">&quot;out&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.left&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+        <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     
@@ -448,7 +488,7 @@ TRAIN: [985 986 987 988 989 990 991 992 993 994] TEST: [997 998 999]
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictions_unshuffled</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;predictions_unshuffled&#39;</span><span class="p">:</span> <span class="n">perd_unshuffled</span><span class="p">,</span><span class="s1">&#39;actuals&#39;</span><span class="p">:</span><span class="n">y_train</span><span class="p">})</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;predictions_unshuffled&#39;</span><span class="p">,</span> <span class="s1">&#39;actuals&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;predictions_unshuffled&#39;</span><span class="p">:</span> <span class="n">perd_unshuffled</span><span class="p">,</span><span class="s1">&#39;actuals&#39;</span><span class="p">:</span><span class="n">y_train</span><span class="p">})</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;predictions_unshuffled&#39;</span><span class="p">,</span> <span class="s1">&#39;actuals&#39;</span><span class="p">);</span>
 </pre></div>
 
     </div>
@@ -464,16 +504,6 @@ TRAIN: [985 986 987 988 989 990 991 992 993 994] TEST: [997 998 999]
 <pre>*c* argument looks like a single numeric RGB or RGBA sequence, which should be avoided as value-mapping will have precedence in case its length matches with *x* &amp; *y*.  Please use the *color* keyword-argument or provide a 2-D array with a single row if you intend to specify the same RGB or RGBA value for all points.
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;AxesSubplot:xlabel=&#39;predictions_unshuffled&#39;, ylabel=&#39;actuals&#39;&gt;</pre>
-</div>
-
 </div>
 
 <div class="output_area">
