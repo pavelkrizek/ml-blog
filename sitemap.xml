@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://pavelkrizek.github.io/ml-blog/2021/01/11/linear_model_and_stats.html</loc>
+<loc>https://pavelkrizek.github.io/ml-blog/2021/01/11/cross-validation.html</loc>
+<lastmod>2021-01-11T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://pavelkrizek.github.io/ml-blog/2021/01/11/stats-101.html</loc>
 <lastmod>2021-01-11T00:00:00-06:00</lastmod>
 </url>
 <url>
